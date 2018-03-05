@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User, Token
 from rest_framework import status
-
+import ast,json
 from .serializers import UserSerializer
 
 
@@ -19,6 +19,7 @@ class UserList(APIView):
             print(serializers.data)
             token = Token(user_id=serializers.data["id"])
             token.save()
-            return Response(serializers.data)
+            response_data = [{"token": str(token.token)}]
+            return Response(response_data, status.HTTP_200_OK)
         else:
             return Response(status.HTTP_500_INTERNAL_SERVER_ERROR)

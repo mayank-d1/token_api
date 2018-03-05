@@ -22,6 +22,6 @@ class Token(models.Model):
     expiry_date = models.DateTimeField(default=(timezone.now() + timedelta(days=2)))
 
     def __str__(self):
-        return self.user_id
+        return str(self.user_id)
 
 
